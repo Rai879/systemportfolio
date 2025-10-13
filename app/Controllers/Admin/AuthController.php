@@ -75,11 +75,9 @@ class AuthController extends BaseController
         session()->set($sessionData);
 
         // Update waktu login terakhir
-        if ($this->userModel->fieldExists('last_login')) {
-            $this->userModel->update($user['id'], [
-                'last_login' => date('Y-m-d H:i:s')
-            ]);
-        }
+        $this->userModel->update($user['id'], [
+            'last_login' => date('Y-m-d H:i:s')
+        ]);
 
         return redirect()->to('/admin/dashboard')->with('success', 'Selamat datang, ' . $user['username'] . '!');
     }
@@ -101,11 +99,6 @@ class AuthController extends BaseController
      */
     public function profile()
     {
-        // Pastikan sudah login
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/admin/login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
         $userId = session()->get('userId');
         $user   = $this->userModel->find($userId);
 
@@ -126,11 +119,6 @@ class AuthController extends BaseController
      */
     public function updateProfile()
     {
-        // Pastikan sudah login
-        if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/admin/login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
         $userId = session()->get('userId');
         $user   = $this->userModel->find($userId);
 
