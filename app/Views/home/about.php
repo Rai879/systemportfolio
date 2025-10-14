@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h1 class="display-4 fw-bold">Tentang Kami</h1>
-                <p class="lead">Mengenal lebih dekat Sanata Medical Suite</p>
+                <p class="lead">Mengenal lebih dekat <?= $aboutCompany['title'] ?></p>
             </div>
         </div>
     </div>
@@ -15,31 +15,36 @@
 <!-- About Content -->
 <section class="section-padding">
     <div class="container">
-        <?php if(isset($aboutCompany)): ?>
-            <div class="row align-items-center mb-5">
-                <div class="col-lg-6">
-                    <h2 class="fw-bold mb-4"><?= $aboutCompany['title'] ?? 'Sanata Medical Suite' ?></h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-4">Tentang <?= $aboutCompany['title'] ?></h2>
+                <?php if(isset($aboutCompany)): ?>
+                    <p><b><?= $aboutCompany['subtitle'] ?? 'subtitle' ?></b></p>
                     <p class="lead"><?= $aboutCompany['description'] ?></p>
-                    
-                    <?php if(isset($aboutCompany['features'])): ?>
-                        <div class="row mt-4">
-                            <?php foreach($aboutCompany['features'] as $feature): ?>
-                                <div class="col-md-6 mb-3">
-                                    <i class="bi bi-check-circle text-success me-2"></i> <?= $feature ?>
-                                </div>
-                            <?php endforeach; ?>
+                        <div class="bg-primary text-white rounded p-3 me-3">
+                            <h3 class="mb-0"><?= $aboutCompany['years_experience'] ?? '5' ?>+</h3>
+                            <small>Tahun Pengalaman</small>
                         </div>
+                        <br>
+                    <?php if(isset($aboutCompany['features'])): ?>
+                        <ul class="list-unstyled">
+                            <?php foreach($aboutCompany['features'] as $feature): ?>
+                                <li class="mb-2"><i class="bi bi-check-circle text-success me-2"></i> <?= $feature ?></li>
+                            <?php endforeach; ?>
+                        </ul>
                     <?php endif; ?>
-                </div>
-                <div class="col-lg-6">
-                    <?php if(isset($aboutCompany['image'])): ?>
-                        <img src="<?= base_url('uploads/about/' . $aboutCompany['image']) ?>" alt="About Us" class="img-fluid rounded shadow">
-                    <?php else: ?>
-                        <img src="<?= base_url('assets/images/about-placeholder.jpg') ?>" alt="About Us" class="img-fluid rounded shadow">
-                    <?php endif; ?>
-                </div>
+                <?php else: ?>
+                    <p>Informasi tentang perusahaan akan segera diupdate.</p>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
+            <div class="col-lg-6">
+                <?php if(isset($aboutCompany['image'])): ?>
+                    <img src="<?= base_url('uploads/about/' . $aboutCompany['image']) ?>" alt="About Us" class="img-fluid rounded">
+                <?php else: ?>
+                    <img src="<?= base_url('assets/images/about-placeholder.jpg') ?>" alt="About Us" class="img-fluid rounded">
+                <?php endif; ?>
+            </div>
+        </div>
 
         <!-- Team Section -->
         <?php if(isset($teamMembers) && !empty($teamMembers)): ?>

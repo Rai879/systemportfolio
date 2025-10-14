@@ -146,16 +146,12 @@ class FaqController extends BaseController
         $faq = $this->faqModel->find($id);
 
         if (!$faq) {
-            return $this->response->setJSON(['success' => false, 'message' => 'FAQ tidak ditemukan.']);
+            return redirect()->to('/admin/faq')->with('error', 'FAQ tidak ditemukan.');
         }
 
         $newStatus = $faq['is_active'] ? 0 : 1;
         $this->faqModel->update($id, ['is_active' => $newStatus]);
 
-        return $this->response->setJSON([
-            'success' => true, 
-            'message' => 'Status FAQ berhasil diubah.',
-            'newStatus' => $newStatus
-        ]);
+        return redirect()->to('/admin/faq')->with('success', 'Status FAQ berhasil diubah.');
     }
 }

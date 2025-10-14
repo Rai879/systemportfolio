@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <h5><?= $siteSettings['site_name'] ?? 'Solusi teknologi terdepan untuk rumah sakit modern.' ?></h5>
+                    <h5><?= 'PT. ' . ($siteSettings['site_name'] ?? 'Solusi teknologi terdepan untuk rumah sakit modern.') ?></h5>
                     <p><?= $siteSettings['site_description'] ?? 'Solusi teknologi terdepan untuk rumah sakit modern.' ?></p>
                     <div class="social-links">
                         <?php if(isset($siteSettings['social_facebook'])): ?>
@@ -43,7 +43,7 @@
             </div>
             <hr class="bg-light">
             <div class="text-center">
-                <p>&copy; <?= date('Y') ?> All right reserved by <b>PT Sanata System</b></p>
+                <p>&copy; <?= date('Y') ?> All right reserved by <b><?= $siteSettings['site_name'] ?? 'Aplikasi Rumah Sakit' ?></b></p>
             </div>
         </div>
     </footer>

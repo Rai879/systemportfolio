@@ -53,16 +53,14 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h2 class="fw-bold mb-4">Tentang Sanata Medical Suite</h2>
+                <h2 class="fw-bold mb-4">Tentang <?= $siteSettings['site_name'] ?? 'Aplikasi Rumah Sakit' ?></h2>
                 <?php if(isset($aboutCompany)): ?>
                     <p class="lead"><?= $aboutCompany['description'] ?></p>
-                    <div class="d-flex align-items-center mb-3">
                         <div class="bg-primary text-white rounded p-3 me-3">
                             <h3 class="mb-0"><?= $aboutCompany['years_experience'] ?? '5' ?>+</h3>
                             <small>Tahun Pengalaman</small>
                         </div>
-                        <p>Dalam menyediakan solusi teknologi kesehatan</p>
-                    </div>
+                        <br>
                     <?php if(isset($aboutCompany['features'])): ?>
                         <ul class="list-unstyled">
                             <?php foreach($aboutCompany['features'] as $feature): ?>

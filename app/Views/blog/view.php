@@ -30,21 +30,42 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <?php if($post['featured_image']): ?>
-                    <img src="<?= base_url('uploads/blog/' . $post['featured_image']) ?>" alt="<?= $post['title'] ?>" class="img-fluid rounded mb-4 w-100">
-                <?php endif; ?>
-                
                 <article class="blog-content">
-                    <?= $post['content'] ?>
+                    <!-- Excerpt -->
+                    <div class="mb-4">
+                        <?= $post['excerpt'] ?>
+                    </div>
+
+                    <!-- Featured Image -->
+                    <?php if($post['featured_image']): ?>
+                        <div class="text-center mb-4">
+                            <img src="<?= base_url('uploads/blog/' . $post['featured_image']) ?>" alt="<?= $post['title'] ?>" class="img-fluid rounded shadow w-100" style="max-height:400px; object-fit:cover;">
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Content -->
+                    <div>
+                        <?= $post['content'] ?>
+                    </div>
                 </article>
 
                 <!-- Share Buttons -->
                 <div class="mt-5 pt-4 border-top">
                     <h6>Bagikan artikel ini:</h6>
                     <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-outline-primary btn-sm"><i class="bi bi-facebook"></i> Facebook</a>
-                        <a href="#" class="btn btn-outline-info btn-sm"><i class="bi bi-twitter"></i> Twitter</a>
-                        <a href="#" class="btn btn-outline-danger btn-sm"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                        <?php
+                            $url = urlencode(current_url());
+                            $title = urlencode($post['title']);
+                        ?>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $url ?>" target="_blank" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-facebook"></i> Facebook
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?url=<?= $url ?>&text=<?= $title ?>" target="_blank" class="btn btn-outline-info btn-sm">
+                            <i class="bi bi-twitter"></i> Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?= $url ?>&title=<?= $title ?>" target="_blank" class="btn btn-outline-danger btn-sm">
+                            <i class="bi bi-linkedin"></i> LinkedIn
+                        </a>
                     </div>
                 </div>
 

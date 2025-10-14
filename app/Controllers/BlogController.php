@@ -29,7 +29,7 @@ class BlogController extends BaseController
             ->paginate($perPage, 'default', $page);
 
         $data = [
-            'title' => 'Blog & Artikel - Sanata Medical Suite',
+            'title' => 'Blog & Artikel',
             'blogPosts' => $blogPosts,
             'pager' => $this->blogPostModel->pager,
             'siteSettings' => $this->siteSettingModel->getSettings(),

@@ -28,4 +28,12 @@ class BlogPostModel extends Model
                     ->limit($limit)
                     ->findAll();
     }
+
+    // Fungsi untuk menambah jumlah views pada post
+    public function incrementViews($id)
+    {
+        return $this->set('views', 'views + 1', false)
+                    ->where('id', $id)
+                    ->update();
+    }
 }

@@ -182,17 +182,13 @@ class BlogPostController extends BaseController
         $blogPost = $this->blogPostModel->find($id);
 
         if (!$blogPost) {
-            return $this->response->setJSON(['success' => false, 'message' => 'Blog post tidak ditemukan.']);
+            return redirect()->to('/admin/blog-posts')->with('error', 'Blog post tidak ditemukan.');
         }
 
         $newStatus = $blogPost['is_published'] ? 0 : 1;
         $this->blogPostModel->update($id, ['is_published' => $newStatus]);
 
-        return $this->response->setJSON([
-            'success' => true, 
-            'message' => 'Status publikasi berhasil diubah.',
-            'newStatus' => $newStatus
-        ]);
+        return redirect()->to('/admin/blog-posts')->with('success', 'Status publikasi berhasil diubah.');
     }
 
     /**
