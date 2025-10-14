@@ -47,7 +47,8 @@ class SiteSettingController extends BaseController
             'site_name' => 'required',
             'site_description' => 'permit_empty',
             'contact_email' => 'permit_empty|valid_email',
-            'contact_phone' => 'permit_empty'
+            'contact_phone' => 'permit_empty',
+            'contact_address' => 'permit_empty'
         ];
 
         if (!$this->validate($rules)) {
@@ -78,34 +79,5 @@ class SiteSettingController extends BaseController
 
         return redirect()->to('/admin/settings')->with('success', 'Pengaturan media sosial berhasil diperbarui.');
     }
-
-    public function updateSeo()
-    {
-        $fields = ['meta_title', 'meta_description', 'meta_keywords'];
-        
-        foreach ($fields as $field) {
-            $value = $this->request->getPost($field);
-            $this->updateOrCreateSetting($field, $value);
-        }
-
-        return redirect()->to('/admin/settings')->with('success', 'Pengaturan SEO berhasil diperbarui.');
-    }
-
-    /**
-     * Helper method to update or create setting
-     */
-    private function updateOrCreateSetting($key, $value)
-    {
-        $existing = $this->siteSettingModel->where('setting_key', $key)->first();
-        
-        if ($existing) {
-            return $this->siteSettingModel->update($existing['id'], ['setting_value' => $value]);
-        } else {
-            return $this->siteSettingModel->insert([
-                'setting_key' => $key,
-                'setting_value' => $value,
-                'setting_type' => 'string'
-            ]);
-        }
-    }
+    
 }

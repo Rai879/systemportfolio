@@ -3,20 +3,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <h5>Sanata Medical Suite</h5>
-                    <p><?= $siteSettings['footer_description'] ?? 'Solusi teknologi terdepan untuk rumah sakit modern.' ?></p>
+                    <h5><?= $siteSettings['site_name'] ?? 'Solusi teknologi terdepan untuk rumah sakit modern.' ?></h5>
+                    <p><?= $siteSettings['site_description'] ?? 'Solusi teknologi terdepan untuk rumah sakit modern.' ?></p>
                     <div class="social-links">
                         <?php if(isset($siteSettings['social_facebook'])): ?>
-                            <a href="<?= $siteSettings['social_facebook'] ?>" class="text-light me-2"><i class="bi bi-facebook"></i></a>
+                            <a href="<?= $siteSettings['social_facebook'] ?>" class="text-light me-2" target="_blank" rel="noopener"><i class="bi bi-facebook"></i></a>
                         <?php endif; ?>
                         <?php if(isset($siteSettings['social_instagram'])): ?>
-                            <a href="<?= $siteSettings['social_instagram'] ?>" class="text-light me-2"><i class="bi bi-instagram"></i></a>
+                            <a href="<?= $siteSettings['social_instagram'] ?>" class="text-light me-2" target="_blank" rel="noopener"><i class="bi bi-instagram"></i></a>
                         <?php endif; ?>
                         <?php if(isset($siteSettings['social_linkedin'])): ?>
-                            <a href="<?= $siteSettings['social_linkedin'] ?>" class="text-light me-2"><i class="bi bi-linkedin"></i></a>
+                            <a href="<?= $siteSettings['social_linkedin'] ?>" class="text-light me-2" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i></a>
                         <?php endif; ?>
-                    </div>
-                </div>
+                        <?php if(isset($siteSettings['social_twitter'])): ?>
+                            <a href="<?= $siteSettings['social_twitter'] ?>" class="text-light me-2" target="_blank" rel="noopener"><i class="bi bi-twitter"></i></a>
+                        <?php endif; ?>
+                        <?php if(isset($siteSettings['social_youtube'])): ?>
+                            <a href="<?= $siteSettings['social_youtube'] ?>" class="text-light me-2" target="_blank" rel="noopener"><i class="bi bi-youtube"></i></a>
+                        <?php endif; ?>
+                    </div>    </div>
                 <div class="col-md-4 mb-4">
                     <h5>Kontak Kami</h5>
                     <p>
@@ -38,7 +43,7 @@
             </div>
             <hr class="bg-light">
             <div class="text-center">
-                <p>&copy; <?= date('Y') ?> Sanata Medical Suite. All rights reserved.</p>
+                <p>&copy; <?= date('Y') ?> All right reserved by <b>PT Sanata System</b></p>
             </div>
         </div>
     </footer>

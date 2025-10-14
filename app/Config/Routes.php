@@ -48,9 +48,10 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('users', 'Admin\UserController::index');
     $routes->get('users/create', 'Admin\UserController::create');
     $routes->post('users', 'Admin\UserController::store');
-    $routes->get('users/(:num)/edit', 'Admin\UserController::edit/$1');
-    $routes->put('users/(:num)', 'Admin\UserController::update/$1');
-    $routes->delete('users/(:num)', 'Admin\UserController::delete/$1');
+    $routes->post('users/store', 'Admin\UserController::store');
+    $routes->get('users/edit/(:num)', 'Admin\UserController::edit/$1');
+    $routes->post('users/update/(:num)', 'Admin\UserController::update/$1');
+    $routes->delete('users/delete/(:num)', 'Admin\UserController::delete/$1');
 
     // Site Settings
     $routes->get('settings', 'Admin\SiteSettingController::index');
