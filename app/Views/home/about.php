@@ -51,7 +51,7 @@
             <div class="row mt-5">
                 <div class="col-12 text-center mb-5">
                     <h2 class="fw-bold">Tim Kami</h2>
-                    <p class="text-muted">Orang-orang di balik kesuksesan Sanata Medical Suite</p>
+                    <p class="text-muted">Orang-orang di balik kesuksesan <?= $aboutCompany['title'] ?></p>
                 </div>
                 <?php foreach($teamMembers as $member): ?>
                     <div class="col-md-4 mb-4">

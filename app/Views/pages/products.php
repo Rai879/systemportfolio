@@ -46,12 +46,6 @@
                                 <h5 class="card-title"><?= $product['name'] ?></h5>
                                 <p class="card-text"><?= $product['description'] ?></p>
                             </div>
-                            <div class="card-footer bg-transparent">
-                                <a href="<?= base_url('/products/' . $product['id']) ?>" 
-                                   class="btn btn-primary w-100">
-                                    <i class="bi bi-info-circle"></i> Detail Produk
-                                </a>
-                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

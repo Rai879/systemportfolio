@@ -124,6 +124,45 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->post('why-choose-us/update/(:num)', 'Admin\WhyChooseUsController::update/$1');
     $routes->get('why-choose-us/delete/(:num)', 'Admin\WhyChooseUsController::delete/$1');
     $routes->post('why-choose-us/update-order', 'Admin\WhyChooseUsController::updateOrder');
+
+        // Statistics Routes
+    $routes->get('statistics', 'Admin\StatisticController::index');
+    $routes->get('statistics/create', 'Admin\StatisticController::create');
+    $routes->post('statistics/store', 'Admin\StatisticController::store');
+    $routes->get('statistics/edit/(:num)', 'Admin\StatisticController::edit/$1');
+    $routes->post('statistics/update/(:num)', 'Admin\StatisticController::update/$1');
+    $routes->get('statistics/delete/(:num)', 'Admin\StatisticController::delete/$1');
+    $routes->post('statistics/update-order', 'Admin\StatisticController::updateOrder');
+    
+    // Clients Routes
+    $routes->get('clients', 'Admin\ClientController::index');
+    $routes->get('clients/create', 'Admin\ClientController::create');
+    $routes->post('clients/store', 'Admin\ClientController::store');
+    $routes->get('clients/edit/(:num)', 'Admin\ClientController::edit/$1');
+    $routes->post('clients/update/(:num)', 'Admin\ClientController::update/$1');
+    $routes->get('clients/delete/(:num)', 'Admin\ClientController::delete/$1');
+    $routes->post('clients/update-order', 'Admin\ClientController::updateOrder');
+    $routes->get('clients/toggle-status/(:num)', 'Admin\ClientController::toggleStatus/$1');
+    
+    // Products Routes
+    $routes->get('products', 'Admin\ProductController::index');
+    $routes->get('products/create', 'Admin\ProductController::create');
+    $routes->post('products/store', 'Admin\ProductController::store');
+    $routes->get('products/edit/(:num)', 'Admin\ProductController::edit/$1');
+    $routes->post('products/update/(:num)', 'Admin\ProductController::update/$1');
+    $routes->get('products/delete/(:num)', 'Admin\ProductController::delete/$1');
+    $routes->post('products/update-order', 'Admin\ProductController::updateOrder');
+    $routes->get('products/toggle-status/(:num)', 'Admin\ProductController::toggleStatus/$1');
+    
+    // Team Members Routes
+    $routes->get('team-members', 'Admin\TeamMemberController::index');
+    $routes->get('team-members/create', 'Admin\TeamMemberController::create');
+    $routes->post('team-members/store', 'Admin\TeamMemberController::store');
+    $routes->get('team-members/edit/(:num)', 'Admin\TeamMemberController::edit/$1');
+    $routes->post('team-members/update/(:num)', 'Admin\TeamMemberController::update/$1');
+    $routes->get('team-members/delete/(:num)', 'Admin\TeamMemberController::delete/$1');
+    $routes->post('team-members/update-order', 'Admin\TeamMemberController::updateOrder');
+    $routes->get('team-members/toggle-status/(:num)', 'Admin\TeamMemberController::toggleStatus/$1');
 });
 
 // Redirect admin root to dashboard
