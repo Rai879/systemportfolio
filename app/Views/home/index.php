@@ -366,10 +366,10 @@
             <div class="col-lg-6" data-aos="fade-left">
                 <?php if (isset($aboutCompany['image'])): ?>
                     <img src="<?= base_url('uploads/about/' . $aboutCompany['image']) ?>" alt="About Us"
-                        class="img-fluid rounded shadow-lg">
+                        class="img-fluid rounded" style="width: 70%; height: auto;">
                 <?php else: ?>
                     <img src="<?= base_url('assets/images/about-placeholder.jpg') ?>" alt="About Us"
-                        class="img-fluid rounded shadow-lg">
+                        class="img-fluid rounded" style="width: 70%; height: auto;">
                 <?php endif; ?>
             </div>
         </div>
