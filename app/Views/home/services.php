@@ -15,55 +15,6 @@
 <!-- Services Content -->
 <section class="section-padding">
     <div class="container">
-        <!-- Main Services -->
-        <div class="row mb-5">
-            <div class="col-lg-6 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-primary rounded p-3 me-3">
-                                <i class="bi bi-laptop text-white display-6"></i>
-                            </div>
-                            <h3 class="mb-0">Implementasi Sistem</h3>
-                        </div>
-                        <p class="text-muted">
-                            Implementasi sistem informasi rumah sakit yang terintegrasi dengan pendekatan 
-                            yang terstruktur dan metodologi yang terbukti efektif.
-                        </p>
-                        <ul class="list-unstyled">
-                            <li><i class="bi bi-check-circle text-success me-2"></i> Analisis Kebutuhan</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i> Customization & Configuration</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i> Training & Sertifikasi</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i> Go-Live Support</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-lg-6 mb-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body p-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="bg-success rounded p-3 me-3">
-                                <i class="bi bi-headset text-white display-6"></i>
-                            </div>
-                            <h3 class="mb-0">Support & Maintenance</h3>
-                        </div>
-                        <p class="text-muted">
-                            Layanan dukungan teknis dan pemeliharaan sistem yang komprehensif 
-                            untuk memastikan operasional berjalan lancar 24/7.
-                        </p>
-                        <ul class="list-unstyled">
-                            <li><i class="bi bi-check-circle text-success me-2"></i> Technical Support 24/7</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i> Regular Maintenance</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i> System Monitoring</li>
-                            <li><i class="bi bi-check-circle text-success me-2"></i> Performance Optimization</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Features Grid -->
         <div class="text-center mb-5">
             <h2 class="fw-bold">Fitur Layanan</h2>
@@ -71,8 +22,8 @@
         </div>
 
         <div class="row">
-            <?php if(isset($features) && !empty($features)): ?>
-                <?php foreach($features as $feature): ?>
+            <?php if (isset($features) && !empty($features)): ?>
+                <?php foreach ($features as $feature): ?>
                     <div class="col-md-4 mb-4">
                         <div class="card border-0 h-100 text-center">
                             <div class="card-body">
@@ -93,15 +44,19 @@
         </div>
 
         <!-- Work Scope -->
-        <?php if(isset($workScope)): ?>
+        <?php if (isset($workScope)): ?>
             <div class="row mt-5 align-items-center">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="fw-bold">Cakupan Pekerjaan</h2>
+                    <p class="text-muted">Bidang apa saja yang kami kerjakan</p>
+                </div>
                 <div class="col-lg-6">
                     <h2 class="fw-bold mb-4"><?= $workScope['title'] ?? 'Cakupan Pekerjaan' ?></h2>
                     <p class="lead"><?= $workScope['description'] ?></p>
-                    
-                    <?php if(isset($workScope['features'])): ?>
+
+                    <?php if (isset($workScope['features'])): ?>
                         <div class="row mt-4">
-                            <?php foreach($workScope['features'] as $feature): ?>
+                            <?php foreach ($workScope['features'] as $feature): ?>
                                 <div class="col-md-6 mb-3">
                                     <div class="d-flex align-items-start">
                                         <i class="bi bi-check-circle-fill text-success mt-1 me-2"></i>
@@ -113,27 +68,27 @@
                     <?php endif; ?>
                 </div>
                 <div class="col-lg-6">
-                    <?php if(isset($workScope['image'])): ?>
-                        <img src="<?= base_url('uploads/work-scope/' . $workScope['image']) ?>" 
-                             alt="Work Scope" class="img-fluid rounded shadow">
+                    <?php if (isset($workScope['image'])): ?>
+                        <img src="<?= base_url('uploads/work-scope/' . $workScope['image']) ?>" alt="Work Scope"
+                            class="img-fluid rounded shadow">
                     <?php else: ?>
-                        <img src="<?= base_url('assets/images/work-scope-placeholder.jpg') ?>" 
-                             alt="Work Scope" class="img-fluid rounded shadow">
+                        <img src="<?= base_url('assets/images/work-scope-placeholder.jpg') ?>" alt="Work Scope"
+                            class="img-fluid rounded shadow">
                     <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
 
         <!-- Why Choose Us -->
-        <?php if(isset($whyChooseUs) && !empty($whyChooseUs)): ?>
+        <?php if (isset($whyChooseUs) && !empty($whyChooseUs)): ?>
             <div class="row mt-5">
                 <div class="col-12 text-center mb-5">
                     <h2 class="fw-bold">Mengapa Memilih Kami?</h2>
                     <p class="text-muted">Keunggulan yang membuat kami berbeda</p>
                 </div>
-                
-                <?php foreach($whyChooseUs as $item): ?>
-                    <div class="col-md-6 mb-4">
+
+                <?php foreach ($whyChooseUs as $item): ?>
+                    <div class="col-md-4 mb-4">
                         <div class="card border-0 h-100">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">

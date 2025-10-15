@@ -7,6 +7,7 @@ use App\Models\BlogPostModel;
 use App\Models\ClientModel;
 use App\Models\ProductModel;
 use App\Models\UserModel;
+use App\Models\SiteSettingModel;
 
 class AdminController extends BaseController
 {
@@ -14,6 +15,7 @@ class AdminController extends BaseController
     protected $clientModel;
     protected $productModel;
     protected $userModel;
+    protected $siteSettingModel;
 
     public function __construct()
     {
@@ -21,6 +23,7 @@ class AdminController extends BaseController
         $this->clientModel = new ClientModel();
         $this->productModel = new ProductModel();
         $this->userModel = new UserModel();
+        $this->siteSettingModel = new SiteSettingModel();
     }
 
     public function dashboard()
@@ -43,7 +46,8 @@ class AdminController extends BaseController
             'totalClients' => $totalClients,
             'totalProducts' => $totalProducts,
             'totalUsers' => $totalUsers,
-            'latestPosts' => $latestPosts
+            'latestPosts' => $latestPosts,
+            'siteSettings' => $this->siteSettingModel->getSettings()
         ];
 
         return view('admin/dashboard', $data);

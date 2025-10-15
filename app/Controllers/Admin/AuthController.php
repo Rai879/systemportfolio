@@ -74,10 +74,17 @@ class AuthController extends BaseController
 
         session()->set($sessionData);
 
-        // Update waktu login terakhir
-        $this->userModel->update($user['id'], [
-            'last_login' => date('Y-m-d H:i:s')
-        ]);
+        // Update waktu login terakhir - DINONAKTIFKAN karena kolom last_login tidak ada
+        // Uncomment jika sudah menambahkan kolom last_login ke tabel users
+        /*
+        try {
+            $this->userModel->update($user['id'], [
+                'last_login' => date('Y-m-d H:i:s')
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'Failed to update last_login: ' . $e->getMessage());
+        }
+        */
 
         return redirect()->to('/admin/dashboard')->with('success', 'Selamat datang, ' . $user['username'] . '!');
     }

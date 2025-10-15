@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h1 class="display-4 fw-bold">Produk & Layanan</h1>
+                <h1 class="display-4 fw-bold">Produk Kami</h1>
                 <p class="lead">Solusi teknologi lengkap untuk rumah sakit modern</p>
             </div>
         </div>
@@ -22,42 +22,7 @@
         </div>
 
         <div class="row mb-5">
-            <div class="col-md-3 mb-3">
-                <div class="card text-center border-0 shadow-sm h-100">
-                    <div class="card-body">
-                        <i class="bi bi-hospital display-4 text-primary mb-3"></i>
-                        <h5>SIMRS</h5>
-                        <p class="text-muted">Sistem Informasi Manajemen Rumah Sakit</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card text-center border-0 shadow-sm h-100">
-                    <div class="card-body">
-                        <i class="bi bi-clipboard-plus display-4 text-success mb-3"></i>
-                        <h5>EMR</h5>
-                        <p class="text-muted">Electronic Medical Record</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card text-center border-0 shadow-sm h-100">
-                    <div class="card-body">
-                        <i class="bi bi-people display-4 text-warning mb-3"></i>
-                        <h5>HR Portal</h5>
-                        <p class="text-muted">Human Resources Management</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="card text-center border-0 shadow-sm h-100">
-                    <div class="card-body">
-                        <i class="bi bi-graph-up display-4 text-info mb-3"></i>
-                        <h5>Financial</h5>
-                        <p class="text-muted">Sistem Keuangan & Akuntansi</p>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <!-- Products List -->

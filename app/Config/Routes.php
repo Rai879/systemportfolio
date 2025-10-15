@@ -103,7 +103,7 @@ $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('features/create', 'Admin\FeatureController::create');
     $routes->post('features/store', 'Admin\FeatureController::store');
     $routes->get('features/edit/(:num)', 'Admin\FeatureController::edit/$1');
-    $routes->post('features/update/(:num)', 'Admin\FeatureController::update/$1');
+    $routes->put('features/update/(:num)', 'Admin\FeatureController::update/$1');
     $routes->get('features/delete/(:num)', 'Admin\FeatureController::delete/$1');
     $routes->post('features/update-order', 'Admin\FeatureController::updateOrder');
     $routes->get('features/toggle-status/(:num)', 'Admin\FeatureController::toggleStatus/$1');
