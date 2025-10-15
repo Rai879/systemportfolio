@@ -113,13 +113,44 @@
             /* Warna latar belakang saat hover */
             color: var(--navbar-hover-color);
         }
+
         .hero-section {
             background: #e6ecfa;
             color: #333;
             padding: 100px 0;
         }
+
         .section-padding {
             padding: 80px 0;
+        }
+    </style>
+    <style>
+        :root {
+            --navbar-height: 70px;
+            /* Pastikan konsisten dengan body padding-top */
+        }
+
+        .navbar-custom {
+            background-color: white !important;
+            position: fixed;
+            /* Ubah dari sticky ke fixed */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .05);
+            height: var(--navbar-height);
+        }
+
+        .navbar .container {
+            min-height: var(--navbar-height);
+            display: flex;
+            align-items: center;
+        }
+
+        /* Pastikan konten utama tidak tertutup navbar */
+        body {
+            padding-top: var(--navbar-height);
         }
     </style>
 </head>
@@ -128,7 +159,8 @@
     <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('icon/icon.png') ?>" style="height:32px; width:auto; margin-right:8px;"> <?= get_site_settings('site_name') ?? 'Aplikasi Rumah Sakit' ?>
+                <img src="<?= base_url('icon/icon.png') ?>" style="height:32px; width:auto; margin-right:8px;">
+                <?= get_site_settings('site_name') ?? 'Aplikasi Rumah Sakit' ?>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -140,23 +172,24 @@
                         <a class="nav-link active" aria-current="page" href="<?= base_url() ?>">Beranda</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPerusahaan" role="button" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPerusahaan" role="button"
+                            aria-expanded="false">
                             Perusahaan
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownPerusahaan">
                             <li><a class="dropdown-item" href="<?= base_url('/about') ?>">Tentang Kami</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url('/team') ?>">Tim Kami</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('/services') ?>">Layanan</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('/products') ?>">Produk</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button"
+                            aria-expanded="false">
                             Blog
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
                             <li><a class="dropdown-item" href="<?= base_url('/blog') ?>">Semua Artikel</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url('/blog/kategori') ?>">Kategori</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('/faq') ?>">FAQ</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -168,4 +201,5 @@
     </nav>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

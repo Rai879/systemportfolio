@@ -30,7 +30,7 @@
         font-weight: 700;
         margin-bottom: 1rem;
     }
-    
+
     .section-subtitle {
         color: var(--secondary-text);
         max-width: 600px;
@@ -47,7 +47,8 @@
 
     .hero-section .display-4 {
         color: var(--dark-blue);
-        font-weight: 700; /* Lebih tebal */
+        font-weight: 700;
+        /* Lebih tebal */
     }
 
     .hero-section .highlight {
@@ -70,7 +71,8 @@
         border-color: var(--primary-color);
         font-weight: 500;
         padding: 0.8rem 2rem;
-        border-radius: 50px; /* Tombol rounded */
+        border-radius: 50px;
+        /* Tombol rounded */
         transition: all 0.3s ease;
     }
 
@@ -78,7 +80,7 @@
         transform: translateY(-3px);
         box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4);
     }
-    
+
     .hero-section .img-fluid {
         max-height: 450px;
         /* Animasi gambar mengambang */
@@ -86,11 +88,19 @@
     }
 
     @keyframes floatAnimation {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-        100% { transform: translateY(0); }
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
     }
-    
+
     /* Carousel styling */
     #heroCarousel .carousel-indicators button {
         background-color: var(--primary-color);
@@ -127,7 +137,7 @@
         font-size: 3rem;
         margin-bottom: 1.5rem;
     }
-    
+
     .feature-card h4 {
         color: var(--dark-blue);
         font-weight: 600;
@@ -143,7 +153,7 @@
         padding: 20px 30px;
         box-shadow: 0 10px 20px rgba(13, 110, 253, 0.3);
     }
-    
+
     .about-box h3 {
         font-weight: 700;
     }
@@ -186,25 +196,56 @@
     .blog-card .card-body {
         padding: 25px;
     }
-    
+
     .blog-card .card-title {
         font-weight: 600;
         color: var(--dark-blue);
     }
-    
+
     .blog-card .btn {
         border-radius: 50px;
         padding: 0.5rem 1.5rem;
     }
-</style>
 
+    /* === [ FIX OVERLAP ISSUES ] === */
+    body {
+        padding-top: var(--navbar-height, 70px);
+        /* Sesuaikan dengan tinggi navbar */
+    }
+
+    .hero-section {
+        padding: 20px 0 40px 0;
+        /* Reduced top padding */
+        margin-top: 0;
+    }
+
+    /* Adjust section padding untuk menghindari tumpang tindih */
+    .section-padding {
+        padding: 60px 0;
+    }
+
+    /* Pastikan konten tidak tertutup footer */
+    main {
+        min-height: calc(100vh - 200px);
+        /* Sesuaikan dengan tinggi footer */
+        position: relative;
+    }
+
+    /* Footer spacing */
+    .footer {
+        margin-top: auto;
+    }
+</style>
+<!-- Hero Section -->
 <section class="hero-section">
     <?php if (isset($heroSlides) && !empty($heroSlides)): ?>
         <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
             <?php if (count($heroSlides) > 1): ?>
                 <div class="carousel-indicators">
                     <?php foreach ($heroSlides as $i => $slide): ?>
-                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?= $i ?>" class="<?= $i === 0 ? 'active' : '' ?>" aria-current="<?= $i === 0 ? 'true' : 'false' ?>" aria-label="Slide <?= $i + 1 ?>"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?= $i ?>"
+                            class="<?= $i === 0 ? 'active' : '' ?>" aria-current="<?= $i === 0 ? 'true' : 'false' ?>"
+                            aria-label="Slide <?= $i + 1 ?>"></button>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
@@ -218,8 +259,10 @@
                                     <?php if (isset($slide['subtitle']) && $slide['subtitle']): ?>
                                         <p class="lead mb-2 text-uppercase fw-semibold"><?= esc($slide['subtitle']) ?></p>
                                     <?php endif; ?>
-                                    
-                                    <h1 class="display-4 fw-bolder mb-3"><?= str_replace('Solution', '<span class="highlight">Solution</span>', esc($slide['title'])) ?></h1>
+
+                                    <h1 class="display-4 fw-bolder mb-3">
+                                        <?= str_replace('Solution', '<span class="highlight">Solution</span>', esc($slide['title'])) ?>
+                                    </h1>
 
                                     <?php if (isset($slide['description']) && $slide['description']): ?>
                                         <p class="hero-description d-none d-sm-block"><?= esc($slide['description']) ?></p>
@@ -232,9 +275,11 @@
                                         </a>
                                     <?php endif; ?>
                                 </div>
-                                <div class="col-lg-6 col-md-12 d-flex justify-content-center justify-content-lg-end" data-aos="fade-left">
+                                <div class="col-lg-6 col-md-12 d-flex justify-content-center justify-content-lg-end"
+                                    data-aos="fade-left">
                                     <?php if (isset($slide['image']) && $slide['image']): ?>
-                                        <img src="<?= base_url('uploads/hero/' . $slide['image']) ?>" class="img-fluid" style="width: auto;" alt="<?= esc($slide['title']) ?>">
+                                        <img src="<?= base_url('uploads/hero/' . $slide['image']) ?>" class="img-fluid"
+                                            style="width: auto;" alt="<?= esc($slide['title']) ?>">
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -264,6 +309,7 @@
     <?php endif; ?>
 </section>
 
+<!-- Features Section -->
 <section class="section-padding">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
@@ -292,6 +338,7 @@
     </div>
 </section>
 
+<!-- About Section -->
 <section class="section-padding bg-light">
     <div class="container">
         <div class="row align-items-center">
@@ -318,15 +365,18 @@
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 <?php if (isset($aboutCompany['image'])): ?>
-                    <img src="<?= base_url('uploads/about/' . $aboutCompany['image']) ?>" alt="About Us" class="img-fluid rounded shadow-lg">
+                    <img src="<?= base_url('uploads/about/' . $aboutCompany['image']) ?>" alt="About Us"
+                        class="img-fluid rounded shadow-lg">
                 <?php else: ?>
-                    <img src="<?= base_url('assets/images/about-placeholder.jpg') ?>" alt="About Us" class="img-fluid rounded shadow-lg">
+                    <img src="<?= base_url('assets/images/about-placeholder.jpg') ?>" alt="About Us"
+                        class="img-fluid rounded shadow-lg">
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Statistics Section -->
 <section class="section-padding statistics-section">
     <div class="container">
         <div class="row text-center">
@@ -346,6 +396,57 @@
     </div>
 </section>
 
+<!-- Client Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Klien Kami</h2>
+            <p class="text-muted">Beberapa klien yang telah mempercayakan layanan kami</p>
+        </div>
+        <div class="row align-items-stretch justify-content-center">
+            <?php if (isset($clients) && !empty($clients)): ?>
+                <?php foreach ($clients as $client): ?>
+                    <div class="col-lg-4 col-md-6 col-12 mb-4">
+                        <!-- Modified Structure: Logo on the left, Name and Location data on the right -->
+                        <div
+                            class="client-card p-3 border rounded h-100 shadow-sm d-flex align-items-center transition duration-300 hover:shadow-lg">
+
+                            <!-- Small Logo Wrapper (Fixed size to make data prominent) -->
+                            <div class="client-logo-wrapper me-3 flex-shrink-0">
+                                <img src="<?= base_url('uploads/clients/' . $client['logo']) ?>"
+                                    alt="<?= esc($client['name']) ?>" class="img-fluid rounded"
+                                    style="max-height: 40px; width: 40px; object-fit: contain; opacity: 0.8;">
+                            </div>
+
+                            <!-- Data/Text Area (Takes up remaining space) -->
+                            <div class="client-details flex-grow-1 text-start">
+                                <!-- Client Name (Primary Data) -->
+                                <h6 class="fw-bold mb-0 text-truncate" title="<?= esc($client['name']) ?>"
+                                    style="font-size: 1rem;">
+                                    <?= esc($client['name']) ?>
+                                </h6>
+
+                                <!-- Location (Secondary Data) -->
+                                <?php if (!empty($client['location'])): ?>
+                                    <p class="text-muted small mb-0 text-truncate">
+                                        <span class="me-1" style="font-size: 0.8rem;">&#x1f4cd;</span>
+                                        <?= esc($client['location']) ?>
+                                    </p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="col-12 text-center">
+                    <p>Data klien akan segera tersedia</p>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+
 <section class="section-padding bg-light">
     <div class="container">
         <div class="text-center mb-5" data-aos="fade-up">
@@ -358,14 +459,17 @@
                     <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="<?= $key * 100 ?>">
                         <div class="card blog-card h-100">
                             <?php if ($post['featured_image']): ?>
-                                <img src="<?= base_url('uploads/blog/' . $post['featured_image']) ?>" class="card-img-top" alt="<?= $post['title'] ?>">
+                                <img src="<?= base_url('uploads/blog/' . $post['featured_image']) ?>" class="card-img-top"
+                                    alt="<?= $post['title'] ?>">
                             <?php else: ?>
-                                <img src="<?= base_url('assets/images/blog-placeholder.jpg') ?>" class="card-img-top" alt="Blog Image">
+                                <img src="<?= base_url('assets/images/blog-placeholder.jpg') ?>" class="card-img-top"
+                                    alt="Blog Image">
                             <?php endif; ?>
                             <div class="card-body d-flex flex-column">
                                 <h5 class="card-title"><?= $post['title'] ?></h5>
                                 <p class="card-text text-muted small flex-grow-1"><?= $post['excerpt'] ?></p>
-                                <a href="<?= base_url('/blog/' . $post['slug']) ?>" class="btn btn-primary mt-3 align-self-start">Baca Selengkapnya</a>
+                                <a href="<?= base_url('/blog/' . $post['slug']) ?>"
+                                    class="btn btn-primary mt-3 align-self-start">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
