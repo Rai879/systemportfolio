@@ -110,6 +110,16 @@ class PageController extends BaseController
         return view('pages/terms_of_service', $data);
     }
 
+    public function client()
+    {
+        $data = [
+            'title' => 'Client - Sanata Medical Suite',
+            'siteSettings' => $this->siteSettingModel->getSettings()
+        ];
+
+        return view('pages/client', $data);
+    }
+
     /**
      * Handle contact form submission
      */

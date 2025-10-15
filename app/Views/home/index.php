@@ -2,13 +2,13 @@
 
 <!-- Hero Section -->
 <section class="hero-section p-0 vh-100">
-    <?php if (isset($heroSlides) && !empty($heroSlides)): ?> 
+    <?php if (isset($heroSlides) && !empty($heroSlides)): ?>
         <div id="heroCarousel" class="carousel slide h-100" data-bs-ride="carousel">
-            
+
             <div class="carousel-indicators">
                 <?php foreach ($heroSlides as $i => $slide): ?>
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?= $i ?>" 
-                        class="<?= $i === 0 ? 'active' : '' ?>" aria-current="<?= $i === 0 ? 'true' : 'false' ?>" 
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?= $i ?>"
+                        class="<?= $i === 0 ? 'active' : '' ?>" aria-current="<?= $i === 0 ? 'true' : 'false' ?>"
                         aria-label="Slide <?= $i + 1 ?>"></button>
                 <?php endforeach; ?>
             </div>
@@ -16,29 +16,30 @@
             <div class="carousel-inner h-100">
                 <?php foreach ($heroSlides as $i => $slide): ?>
                     <div class="carousel-item <?= $i === 0 ? 'active' : '' ?> h-100">
-                        
+
                         <?php if (isset($slide['image']) && $slide['image']): ?>
-                            <img src="<?= base_url('uploads/hero/' . $slide['image']) ?>" 
-                                 class="d-block w-100 h-100" 
-                                 style="object-fit: cover;" alt="<?= esc($slide['title']) ?>">
-                            
+                            <img src="<?= base_url('uploads/hero/' . $slide['image']) ?>" class="d-block w-100 h-100"
+                                style="object-fit: cover;" alt="<?= esc($slide['title']) ?>">
+
                             <div class="carousel-caption d-flex align-items-center justify-content-start text-start p-5 h-100">
                                 <div class="container text-white">
                                     <div class="row">
                                         <div class="col-lg-7 col-md-9">
-                                            
+
                                             <?php if (isset($slide['subtitle']) && $slide['subtitle']): ?>
-                                                <p class="lead mb-2 text-uppercase fw-semibold text-shadow"><?= esc($slide['subtitle']) ?></p>
+                                                <p class="lead mb-2 text-uppercase fw-semibold text-shadow">
+                                                    <?= esc($slide['subtitle']) ?></p>
                                             <?php endif; ?>
 
                                             <h1 class="display-3 fw-bolder mb-3 text-shadow"><?= esc($slide['title']) ?></h1>
-                                            
+
                                             <?php if (isset($slide['description']) && $slide['description']): ?>
                                                 <p class="mb-4 d-none d-sm-block text-shadow"><?= esc($slide['description']) ?></p>
                                             <?php endif; ?>
 
                                             <?php if (isset($slide['button_text']) && $slide['button_text'] && isset($slide['button_link']) && $slide['button_link']): ?>
-                                                <a href="<?= esc($slide['button_link']) ?>" class="btn btn-light btn-lg mt-2"><?= esc($slide['button_text']) ?></a>
+                                                <a href="<?= esc($slide['button_link']) ?>"
+                                                    class="btn btn-light btn-lg mt-2"><?= esc($slide['button_text']) ?></a>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -67,7 +68,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-            
+
         </div>
     <?php else: ?>
         <div class="container py-5 text-center bg-light min-vh-50 d-flex align-items-center justify-content-center">
@@ -160,6 +161,56 @@
             <?php else: ?>
                 <div class="col-12">
                     <p>Data statistik akan segera tersedia</p>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Client Section -->
+<section class="section-padding">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Klien Kami</h2>
+            <p class="text-muted">Beberapa klien yang telah mempercayakan layanan kami</p>
+        </div>
+        <div class="row align-items-stretch justify-content-center">
+            <?php if (isset($clients) && !empty($clients)): ?>
+                <?php foreach ($clients as $client): ?>
+                    <div class="col-lg-4 col-md-6 col-12 mb-4">
+                        <!-- Modified Structure: Logo on the left, Name and Location data on the right -->
+                        <div
+                            class="client-card p-3 border rounded h-100 shadow-sm d-flex align-items-center transition duration-300 hover:shadow-lg">
+
+                            <!-- Small Logo Wrapper (Fixed size to make data prominent) -->
+                            <div class="client-logo-wrapper me-3 flex-shrink-0">
+                                <img src="<?= base_url('uploads/clients/' . $client['logo']) ?>"
+                                    alt="<?= esc($client['name']) ?>" class="img-fluid rounded"
+                                    style="max-height: 40px; width: 40px; object-fit: contain; opacity: 0.8;">
+                            </div>
+
+                            <!-- Data/Text Area (Takes up remaining space) -->
+                            <div class="client-details flex-grow-1 text-start">
+                                <!-- Client Name (Primary Data) -->
+                                <h6 class="fw-bold mb-0 text-truncate" title="<?= esc($client['name']) ?>"
+                                    style="font-size: 1rem;">
+                                    <?= esc($client['name']) ?>
+                                </h6>
+
+                                <!-- Location (Secondary Data) -->
+                                <?php if (!empty($client['location'])): ?>
+                                    <p class="text-muted small mb-0 text-truncate">
+                                        <span class="me-1" style="font-size: 0.8rem;">&#x1f4cd;</span>
+                                        <?= esc($client['location']) ?>
+                                    </p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="col-12 text-center">
+                    <p>Data klien akan segera tersedia</p>
                 </div>
             <?php endif; ?>
         </div>
