@@ -119,6 +119,10 @@ _modules/*
 .phpintel
 /api/
 
+# Node modules and Vite build output
+node_modules/
+public/dist/
+
 # Visual Studio Code
 .vscode/
 

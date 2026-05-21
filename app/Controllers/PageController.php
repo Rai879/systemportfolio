@@ -6,6 +6,7 @@ use App\Models\FaqModel;
 use App\Models\SiteSettingModel;
 use App\Models\ProductModel;
 use App\Models\TeamMemberModel;
+use App\Models\PageModel;
 
 class PageController extends BaseController
 {
@@ -13,6 +14,7 @@ class PageController extends BaseController
     protected $siteSettingModel;
     protected $productModel;
     protected $teamMemberModel;
+    protected $pageModel;
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class PageController extends BaseController
         $this->siteSettingModel = new SiteSettingModel();
         $this->productModel = new ProductModel();
         $this->teamMemberModel = new TeamMemberModel();
+        $this->pageModel = new PageModel();
     }
 
     public function faq()
@@ -92,22 +95,30 @@ class PageController extends BaseController
 
     public function privacyPolicy()
     {
+        $page = $this->pageModel->getPageBySlug('privacy-policy');
+        if (!$page) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
         $data = [
-            'title' => 'Kebijakan Privasi - Sanata Medical Suite',
-            'siteSettings' => $this->siteSettingModel->getSettings()
+            'title' => $page['title'] . ' - Sanata Medical Suite',
+            'siteSettings' => $this->siteSettingModel->getSettings(),
+            'page' => $page
         ];
 
-        return view('pages/privacy_policy', $data);
+        return view('pages/dynamic_page', $data);
     }
 
     public function termsOfService()
     {
+        $page = $this->pageModel->getPageBySlug('terms-of-service');
+        if (!$page) throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
         $data = [
-            'title' => 'Syarat & Ketentuan - Sanata Medical Suite',
-            'siteSettings' => $this->siteSettingModel->getSettings()
+            'title' => $page['title'] . ' - Sanata Medical Suite',
+            'siteSettings' => $this->siteSettingModel->getSettings(),
+            'page' => $page
         ];
 
-        return view('pages/terms_of_service', $data);
+        return view('pages/dynamic_page', $data);
     }
 
     public function client()

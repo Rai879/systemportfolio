@@ -26,7 +26,7 @@ class AdminController extends BaseController
         $this->siteSettingModel = new SiteSettingModel();
     }
 
-    public function dashboard()
+    public function index()
     {
         // Get counts for dashboard stats
         $totalBlogPosts = $this->blogPostModel->countAll();
@@ -42,26 +42,53 @@ class AdminController extends BaseController
 
         $data = [
             'title' => 'Dashboard - Admin Panel',
-            'totalBlogPosts' => $totalBlogPosts,
-            'totalClients' => $totalClients,
-            'totalProducts' => $totalProducts,
-            'totalUsers' => $totalUsers,
+            'stats' => [
+                'totalBlogPosts' => $totalBlogPosts,
+                'totalClients' => $totalClients,
+                'totalProducts' => $totalProducts,
+                'totalUsers' => $totalUsers,
+            ],
             'latestPosts' => $latestPosts,
             'siteSettings' => $this->siteSettingModel->getSettings()
         ];
 
-        return view('admin/dashboard', $data);
+        return view('admin/dashboard/index', $data);
     }
 
-    public function analytics()
+    public function apiDashboard()
     {
-        // You can implement analytics here
-        // For now, we'll just show a basic page
-        
-        $data = [
-            'title' => 'Analytics - Admin Panel'
-        ];
+        // Get counts for dashboard stats
+        $totalBlogPosts = $this->blogPostModel->countAll();
+        $totalClients = $this->clientModel->where('is_active', 1)->countAllResults();
+        $totalProducts = $this->productModel->where('is_active', 1)->countAllResults();
+        $totalUsers = $this->userModel->countAll();
 
-        return view('admin/analytics', $data);
+        // Get latest blog posts
+        $latestPosts = $this->blogPostModel
+            ->orderBy('created_at', 'DESC')
+            ->limit(5)
+            ->findAll();
+
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => [
+                'stats' => [
+                    'totalBlogPosts' => $totalBlogPosts,
+                    'totalClients' => $totalClients,
+                    'totalProducts' => $totalProducts,
+                    'totalUsers' => $totalUsers,
+                ],
+                'latestPosts' => $latestPosts,
+                'siteSettings' => $this->siteSettingModel->getSettings()
+            ]
+        ]);
+    }
+
+    public function apiAnalytics()
+    {
+        return $this->response->setJSON([
+            'success' => true,
+            'data' => []
+        ]);
     }
 }

@@ -1,138 +1,131 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Admin Panel</title>
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <title>Admin Login - <?= get_site_settings('site_name') ?? 'System879' ?></title>
     <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            height: 100vh;
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fbfbfd;
             display: flex;
+            justify-content: center;
             align-items: center;
+            color: #1d1d1f;
         }
-        .login-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            overflow: hidden;
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            box-sizing: border-box;
         }
-        .login-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
+        .brand {
             text-align: center;
+            margin-bottom: 30px;
         }
-        .login-body {
-            padding: 2rem;
+        .brand h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+        .brand p {
+            color: #86868b;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #1d1d1f;
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            border: 1px solid #d2d2d7;
+            border-radius: 12px;
+            background-color: #fbfbfd;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease;
         }
         .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+            outline: none;
+            border-color: #0071e3;
+            background-color: #ffffff;
         }
-        .btn-login {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #0071e3;
+            color: #ffffff;
             border: none;
-            color: white;
-            padding: 10px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
         }
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        .btn-submit:hover {
+            background-color: #0077ed;
+        }
+        .alert {
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .alert-error {
+            background-color: #fce8e6;
+            color: #c5221f;
+            border: 1px solid #f9d2ce;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-4">
-                <div class="login-card">
-                    <div class="login-header">
-                        <i class="bi bi-hospital display-4"></i>
-                        <h2 class="mt-3">Sanata Medical</h2>
-                        <p class="mb-0">Admin Panel</p>
-                    </div>
-                    <div class="login-body">
-                        <!-- Flash Messages -->
-                        <?php if(session()->getFlashdata('error')): ?>
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <?= session()->getFlashdata('error') ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        <?php endif; ?>
-
-                        <?php if(session()->getFlashdata('success')): ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?= session()->getFlashdata('success') ?>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            </div>
-                        <?php endif; ?>
-
-                        <form action="<?= base_url('/admin/login') ?>" method="post">
-                            <?= csrf_field() ?>
-                            
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
-                                    <input type="text" class="form-control" id="username" name="username" 
-                                           value="<?= old('username') ?>" required autofocus>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-                            </div>
-
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-login btn-lg">
-                                    <i class="bi bi-box-arrow-in-right"></i> Login
-                                </button>
-                            </div>
-                        </form>
-
-                        <div class="text-center mt-4">
-                            <a href="<?= base_url() ?>" class="text-decoration-none">
-                                <i class="bi bi-arrow-left"></i> Kembali ke Website
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Copyright -->
-                <div class="text-center text-white mt-4">
-                    <small>&copy; <?= date('Y') ?> Sanata Medical Suite. All rights reserved.</small>
-                </div>
-            </div>
+    <div class="login-container">
+        <div class="brand">
+            <h1>Admin Panel</h1>
+            <p>Sign in to manage your content</p>
         </div>
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Simple form validation
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function(e) {
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                
-                if (!username || !password) {
-                    e.preventDefault();
-                    alert('Harap isi username dan password!');
-                }
-            });
-        });
-    </script>
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-error">
+                <?= session()->getFlashdata('error') ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('errors')): ?>
+            <div class="alert alert-error">
+                <ul style="margin:0; padding-left:20px">
+                    <?php foreach (session()->getFlashdata('errors') as $err): ?>
+                        <li><?= $err ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <form action="<?= base_url('/admin/login') ?>" method="POST">
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required autofocus value="<?= old('username') ?>">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required>
+            </div>
+            <button type="submit" class="btn-submit">Sign In</button>
+        </form>
+    </div>
 </body>
 </html>

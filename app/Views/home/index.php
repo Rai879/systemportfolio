@@ -17,10 +17,6 @@
         --card-hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     }
 
-    body {
-        font-family: 'Poppins', sans-serif;
-    }
-
     .section-padding {
         padding: 80px 0;
     }
@@ -208,11 +204,6 @@
     }
 
     /* === [ FIX OVERLAP ISSUES ] === */
-    body {
-        padding-top: var(--navbar-height, 70px);
-        /* Sesuaikan dengan tinggi navbar */
-    }
-
     .hero-section {
         padding: 20px 0 40px 0;
         /* Reduced top padding */
@@ -366,10 +357,10 @@
             <div class="col-lg-6" data-aos="fade-left">
                 <?php if (isset($aboutCompany['image'])): ?>
                     <img src="<?= base_url('uploads/about/' . $aboutCompany['image']) ?>" alt="About Us"
-                        class="img-fluid rounded" style="width: 70%; height: auto;">
+                        class="img-fluid rounded mx-auto d-block" style="width: 70%; height: auto;">
                 <?php else: ?>
                     <img src="<?= base_url('assets/images/about-placeholder.jpg') ?>" alt="About Us"
-                        class="img-fluid rounded" style="width: 70%; height: auto;">
+                        class="img-fluid rounded mx-auto d-block" style="width: 70%; height: auto;">
                 <?php endif; ?>
             </div>
         </div>

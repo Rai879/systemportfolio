@@ -123,6 +123,10 @@
         .section-padding {
             padding: 80px 0;
         }
+
+        [v-cloak] {
+            display: none !important;
+        }
     </style>
     <style>
         :root {
@@ -156,11 +160,11 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top">
+    <nav id="frontNavbar" class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top" v-cloak>
         <div class="container">
-            <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('icon/icon.png') ?>" style="height:32px; width:auto; margin-right:8px;">
-                <?= get_site_settings('site_name') ?? 'Aplikasi Rumah Sakit' ?>
+            <a class="navbar-brand" :href="baseUrl">
+                <img :src="logoUrl" style="height:32px; width:auto; margin-right:8px;">
+                {{ siteName }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -168,38 +172,72 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?= base_url() ?>">Beranda</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPerusahaan" role="button"
-                            aria-expanded="false">
-                            Perusahaan
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownPerusahaan">
-                            <li><a class="dropdown-item" href="<?= base_url('/about') ?>">Tentang Kami</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url('/services') ?>">Layanan</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url('/products') ?>">Produk</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button"
-                            aria-expanded="false">
-                            Blog
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownBlog">
-                            <li><a class="dropdown-item" href="<?= base_url('/blog') ?>">Semua Artikel</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url('/faq') ?>">FAQ</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= base_url('/contact') ?>">Kontak</a>
+                    <li class="nav-item" v-for="item in navItems" :key="item.label"
+                        :class="{ dropdown: item.children }">
+                        <template v-if="item.children">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" :class="{ active: isActive(item) }">
+                                {{ item.label }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li v-for="child in item.children" :key="child.label">
+                                    <a class="dropdown-item" :href="child.href">{{ child.label }}</a>
+                                </li>
+                            </ul>
+                        </template>
+                        <template v-else>
+                            <a class="nav-link" :href="item.href" :class="{ active: isActive(item) }">
+                                {{ item.label }}
+                            </a>
+                        </template>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    baseUrl: '<?= base_url() ?>',
+                    logoUrl: '<?= base_url('icon/icon.png') ?>',
+                    siteName: '<?= get_site_settings('site_name') ?? 'Aplikasi Rumah Sakit' ?>',
+                    navItems: [
+                        { label: 'Beranda', href: '<?= base_url() ?>' },
+                        {
+                            label: 'Perusahaan',
+                            children: [
+                                { label: 'Tentang Kami', href: '<?= base_url('/about') ?>' },
+                                { label: 'Layanan', href: '<?= base_url('/services') ?>' },
+                                { label: 'Produk', href: '<?= base_url('/products') ?>' }
+                            ]
+                        },
+                        {
+                            label: 'Blog',
+                            children: [
+                                { label: 'Semua Artikel', href: '<?= base_url('/blog') ?>' },
+                                { label: 'FAQ', href: '<?= base_url('/faq') ?>' }
+                            ]
+                        },
+                        { label: 'Kontak', href: '<?= base_url('/contact') ?>' }
+                    ]
+                };
+            },
+            methods: {
+                normalizePath(path) {
+                    const normalized = new URL(path, window.location.origin).pathname;
+                    return normalized.replace(/\/$/, '') || '/';
+                },
+                isActive(item) {
+                    const path = this.normalizePath(window.location.pathname);
+                    if (item.children) {
+                        return item.children.some(child => this.normalizePath(child.href) === path);
+                    }
+                    return this.normalizePath(item.href) === path;
+                }
+            }
+        }).mount('#frontNavbar');
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+<!-- SPA_CONTENT_START -->

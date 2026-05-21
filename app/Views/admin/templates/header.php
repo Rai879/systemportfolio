@@ -174,6 +174,10 @@
             filter: invert(1);
         }
 
+        [v-cloak] {
+            display: none !important;
+        }
+
         /* Responsive */
         @media (max-width: 991px) {
             .sidebar {
@@ -200,214 +204,53 @@
 </head>
 
 <body>
-    <!-- Mobile Top Bar -->
-    <div class="mobile-top-bar d-lg-none">
-        <button class="mobile-menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
-            <i class="bi bi-list"></i>
-        </button>
-        <div class="mobile-user-info">
-            <i class="bi bi-person-circle me-2"></i>
-            <?= session()->get('username') ?? 'Admin' ?>
+    <div id="adminSidebarApp" v-cloak>
+        <!-- Mobile Top Bar -->
+        <div class="mobile-top-bar d-lg-none">
+            <button class="mobile-menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="mobile-user-info">
+                <i class="bi bi-person-circle me-2"></i>
+                <?= session()->get('username') ?? 'Admin' ?>
+            </div>
         </div>
-    </div>
 
-    <!-- Desktop Sidebar -->
-    <aside class="sidebar d-none d-lg-block">
-        <div class="sidebar-header">
-            <a href="<?= base_url('/admin/dashboard') ?>" class="sidebar-brand">
-                <img src="<?= base_url('icon/icon.png') ?>" alt="Logo">
-                <span><?= get_site_settings('site_name') ?? 'Aplikasi Rumah Sakit' ?></span>
-            </a>
-        </div>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <?php
-                // Get the relevant path for comparison
-                $currentPath = parse_url(current_url(), PHP_URL_PATH);
-                $dashboardPath = base_url('/admin/dashboard', true); // Ensure we get the full path
-                $isActive = $currentPath === $dashboardPath || strpos($currentPath, '/admin/dashboard') !== false;
-                ?>
-                <a class="nav-link <?= $isActive ? 'active' : '' ?>" href="<?= base_url('/admin/dashboard') ?>">
-                    <i class="bi bi-speedometer2"></i> Dashboard
+        <!-- Desktop Sidebar -->
+        <aside class="sidebar d-none d-lg-block">
+            <div class="sidebar-header">
+                <a href="<?= base_url('/admin/dashboard') ?>" class="sidebar-brand">
+                    <img src="<?= base_url('icon/icon.png') ?>" alt="Logo">
+                    <span><?= get_site_settings('site_name') ?? 'Aplikasi Rumah Sakit' ?></span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/users') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/users') ?>">
-                    <i class="bi bi-people"></i> Manajemen User
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/settings') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/settings') ?>">
-                    <i class="bi bi-gear"></i> Pengaturan Situs
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/about-company') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/about-company') ?>">
-                    <i class="bi bi-building"></i> About Company
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/hero-slides') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/hero-slides') ?>">
-                    <i class="bi bi-images"></i> Hero Slides
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/features') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/features') ?>">
-                    <i class="bi bi-star"></i> Features
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/blog-posts') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/blog-posts') ?>">
-                    <i class="bi bi-journal-text"></i> Blog Posts
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/faq') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/faq') ?>">
-                    <i class="bi bi-question-circle"></i> FAQ
-                </a>
-            </li>
-            <li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/work-scope') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/work-scope') ?>">
-                        <i class="bi bi-people"></i> Work Scope
-                    </a>
-                </li>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/why-choose-us') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/why-choose-us') ?>">
-                    <i class="bi bi-building"></i> Why Choose Us
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/clients') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/clients') ?>">
-                    <i class="bi bi-building"></i> Clients
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/products') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/products') ?>">
-                    <i class="bi bi-box"></i> Products
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/team-members') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/team-members') ?>">
-                    <i class="bi bi-person-badge"></i> Team Members
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <?= strpos(current_url(), '/admin/statistics') !== false ? 'active' : '' ?>"
-                    href="<?= base_url('/admin/statistics') ?>">
-                    <i class="bi bi-graph-up"></i> Statistics
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url('/admin/logout') ?>">
-                    <i class="bi bi-box-arrow-left"></i> Logout
-                </a>
-            </li>
-        </ul>
-    </aside>
-
-    <!-- Mobile Sidebar (Offcanvas) -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">
-                <img src="<?= base_url('icon/icon.png') ?>" alt="Logo" style="height: 28px; margin-right: 8px;">
-                <?= $siteSettings['site_name'] ?? 'Aplikasi Rumah Sakit' ?>
-            </h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body p-0">
-            <ul class="nav flex-column" style="padding: 15px;">
-                <li class="nav-item">
-                    <a class="nav-link <?= current_url() == base_url('/admin/dashboard') ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/dashboard') ?>">
-                        <i class="bi bi-speedometer2"></i> Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/users') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/users') ?>">
-                        <i class="bi bi-people"></i> Manajemen User
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/settings') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/settings') ?>">
-                        <i class="bi bi-gear"></i> Pengaturan Situs
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/about-company') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/about-company') ?>">
-                        <i class="bi bi-building"></i> About Company
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/hero-slides') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/hero-slides') ?>">
-                        <i class="bi bi-images"></i> Hero Slides
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/features') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/features') ?>">
-                        <i class="bi bi-star"></i> Features
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/blog-posts') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/blog-posts') ?>">
-                        <i class="bi bi-journal-text"></i> Blog Posts
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/faq') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/faq') ?>">
-                        <i class="bi bi-question-circle"></i> FAQ
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/clients') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/clients') ?>">
-                        <i class="bi bi-building"></i> Clients
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/products') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/products') ?>">
-                        <i class="bi bi-box"></i> Products
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/team-members') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/team-members') ?>">
-                        <i class="bi bi-person-badge"></i> Team Members
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?= strpos(current_url(), '/admin/statistics') !== false ? 'active' : '' ?>"
-                        href="<?= base_url('/admin/statistics') ?>">
-                        <i class="bi bi-graph-up"></i> Statistics
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('/admin/logout') ?>">
-                        <i class="bi bi-box-arrow-left"></i> Logout
+            </div>
+            <ul class="nav flex-column">
+                <li class="nav-item" v-for="item in sidebarItems" :key="item.label">
+                    <a class="nav-link" :href="item.href" :class="{ active: isActive(item) }" @click="closeMobileSidebar">
+                        <i :class="item.icon"></i> {{ item.label }}
                     </a>
                 </li>
             </ul>
+        </aside>
+
+        <!-- Mobile Sidebar (Offcanvas) -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">
+                    <img src="<?= base_url('icon/icon.png') ?>" alt="Logo" style="height: 28px; margin-right: 8px;">
+                    <?= $siteSettings['site_name'] ?? 'Aplikasi Rumah Sakit' ?>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <ul class="nav flex-column" style="padding: 15px;">
+                    <li class="nav-item" v-for="item in sidebarItems" :key="item.label">
+                        <a class="nav-link" :href="item.href" :class="{ active: isActive(item) }" @click="closeMobileSidebar">
+                            <i :class="item.icon"></i> {{ item.label }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -450,6 +293,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <!-- DataTables JS -->
@@ -457,24 +301,160 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
     <script>
-        // Initialize DataTables
-        $(document).ready(function () {
-            $('.data-table').DataTable({
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json'
+        const adminSidebarApp = Vue.createApp({
+            data() {
+                return {
+                    currentPath: '<?= parse_url(current_url(), PHP_URL_PATH) ?>',
+                    sidebarItems: [
+                        { label: 'Dashboard', href: '<?= base_url('/admin/dashboard') ?>', icon: 'bi bi-speedometer2', exact: true },
+                        { label: 'Manajemen User', href: '<?= base_url('/admin/users') ?>', icon: 'bi bi-people' },
+                        { label: 'About Company', href: '<?= base_url('/admin/about-company') ?>', icon: 'bi bi-building' },
+                        { label: 'Halaman Dinamis', href: '<?= base_url('/admin/pages') ?>', icon: 'bi bi-file-earmark-text' },
+                        { label: 'Pengaturan Situs', href: '<?= base_url('/admin/settings') ?>', icon: 'bi bi-gear' },
+                        { label: 'Hero Slides', href: '<?= base_url('/admin/hero-slides') ?>', icon: 'bi bi-images' },
+                        { label: 'Features', href: '<?= base_url('/admin/features') ?>', icon: 'bi bi-star' },
+                        { label: 'Blog Posts', href: '<?= base_url('/admin/blog-posts') ?>', icon: 'bi bi-journal-text' },
+                        { label: 'FAQ', href: '<?= base_url('/admin/faq') ?>', icon: 'bi bi-question-circle' },
+                        { label: 'Work Scope', href: '<?= base_url('/admin/work-scope') ?>', icon: 'bi bi-people' },
+                        { label: 'Why Choose Us', href: '<?= base_url('/admin/why-choose-us') ?>', icon: 'bi bi-building' },
+                        { label: 'Clients', href: '<?= base_url('/admin/clients') ?>', icon: 'bi bi-building' },
+                        { label: 'Products', href: '<?= base_url('/admin/products') ?>', icon: 'bi bi-box' },
+                        { label: 'Team Members', href: '<?= base_url('/admin/team-members') ?>', icon: 'bi bi-person-badge' },
+                        { label: 'Statistics', href: '<?= base_url('/admin/statistics') ?>', icon: 'bi bi-graph-up' },
+                        { label: 'Logout', href: '<?= base_url('/admin/logout') ?>', icon: 'bi bi-box-arrow-left', exact: true }
+                    ]
+                };
+            },
+            methods: {
+                normalizePath(path) {
+                    const normalized = new URL(path, window.location.origin).pathname;
+                    return normalized.replace(/\/$/, '') || '/';
+                },
+                isActive(item) {
+                    const itemPath = this.normalizePath(item.href);
+                    const current = this.normalizePath(this.currentPath);
+                    return item.exact ? current === itemPath : current.startsWith(itemPath);
+                },
+                closeMobileSidebar() {
+                    const offcanvasElement = document.getElementById('mobileSidebar');
+                    if (offcanvasElement) {
+                        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                        if (offcanvas) offcanvas.hide();
+                    }
                 }
+            }
+        });
+        
+        const adminAppInstance = adminSidebarApp.mount('#adminSidebarApp');
+
+        // Vanilla SPA Script (Tanpa Turbo, mengganti main-content via fetch)
+        function initAdminScripts() {
+            // Re-init DataTable
+            if ($.fn.DataTable.isDataTable('.data-table')) {
+                $('.data-table').DataTable().destroy();
+            }
+            $('.data-table').DataTable({
+                language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/id.json' }
             });
+        }
+
+        async function fetchAndReplace(url, options = {}) {
+            try {
+                // Tampilkan loading state sederhana di kursor
+                document.body.style.cursor = 'wait';
+                
+                const response = await fetch(url, options);
+                if (!response.ok && response.status !== 400 && response.status !== 422) {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return;
+                    }
+                }
+
+                // If it's a logout redirect or similar
+                if (response.redirected && response.url.includes('/login')) {
+                    window.location.href = response.url;
+                    return;
+                }
+
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                // Update Title & Main Content
+                document.title = doc.title;
+                const newContent = doc.querySelector('.main-content');
+                if (newContent) {
+                    document.querySelector('.main-content').innerHTML = newContent.innerHTML;
+                } else {
+                    // Fallback jika respons tidak memiliki .main-content
+                    window.location.href = url;
+                    return;
+                }
+
+                // Push history jika GET
+                if ((!options.method || options.method === 'GET') && window.location.href !== url) {
+                    window.history.pushState(null, '', url);
+                }
+
+                // Update currentPath di Vue sidebar
+                adminAppInstance.currentPath = window.location.pathname;
+
+                // Re-init
+                initAdminScripts();
+            } catch (e) {
+                console.error('SPA Error:', e);
+                window.location.href = url; // Fallback ke normal load
+            } finally {
+                document.body.style.cursor = 'default';
+            }
+        }
+
+        // Intercept all link clicks
+        document.addEventListener('click', e => {
+            const link = e.target.closest('a');
+            if (!link || !link.href) return;
+            if (link.target === '_blank' || link.hasAttribute('download')) return;
+            if (link.href.includes('/admin/logout')) return; // Biarkan logout normal
+            
+            // Pastikan URL internal admin
+            const currentHost = window.location.origin;
+            if (link.href.startsWith(currentHost) && link.href.includes('/admin')) {
+                e.preventDefault();
+                // Close offcanvas jika di mobile
+                const offcanvasElement = document.getElementById('mobileSidebar');
+                if (offcanvasElement) {
+                    const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                    if (offcanvas) offcanvas.hide();
+                }
+                
+                fetchAndReplace(link.href);
+            }
         });
 
-        // Auto close offcanvas when link is clicked
-        document.querySelectorAll('#mobileSidebar .nav-link').forEach(link => {
-            link.addEventListener('click', function () {
-                const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('mobileSidebar'));
-                if (offcanvas) {
-                    offcanvas.hide();
-                }
-            });
+        // Intercept form submissions
+        document.addEventListener('submit', e => {
+            const form = e.target;
+            if (form.tagName === 'FORM' && form.closest('.main-content')) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const action = form.action || window.location.href;
+                const method = form.method || 'POST';
+                
+                fetchAndReplace(action, {
+                    method: method.toUpperCase(),
+                    body: method.toUpperCase() === 'POST' ? formData : null
+                });
+            }
         });
+
+        // Handle back/forward buttons
+        window.addEventListener('popstate', () => {
+            fetchAndReplace(window.location.href);
+        });
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', initAdminScripts);
     </script>
 
     <?= $this->renderSection('scripts') ?>

@@ -1,4 +1,5 @@
 <!-- Footer -->
+<!-- SPA_CONTENT_END -->
 <style>
     .footer {
         background-color: #051a49;
